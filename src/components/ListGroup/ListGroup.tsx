@@ -2,8 +2,9 @@ import React, { useState } from "react";
 interface props {
   items: string[];
   heading: string;
+  onselect: (item: string) => void;
 }
-const ListGroup = ({ items, heading }: props) => {
+const ListGroup = ({ items, heading, onselect }: props) => {
   const [selectedindex, setselectedindex] = useState(-1);
   return (
     <>
@@ -21,6 +22,7 @@ const ListGroup = ({ items, heading }: props) => {
             onClick={() => {
               setselectedindex(index);
               console.log(item, index);
+              onselect(item);
             }}
           >
             {item}
