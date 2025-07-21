@@ -1,7 +1,6 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import { Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import theme from "./theme";
 const App = () => {
   return (
     <Grid
@@ -15,13 +14,9 @@ const App = () => {
       </GridItem>
       {/* aside only for large devices */}
       <Show above="lg">
-        <GridItem area="aside" bg="gold">
-          Aside
-        </GridItem>
+        <GridItem area="aside">Aside</GridItem>
       </Show>
-      <GridItem area="main" bg="dodgerblue">
-        Main
-      </GridItem>
+      <GridItem area="main">Main</GridItem>
     </Grid>
   ); // create 2 columns
 };
