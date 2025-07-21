@@ -1,9 +1,8 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import { Show, useBreakpointValue } from "@chakra-ui/react";
+import { Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-
+import theme from "./theme";
 const App = () => {
-  const showAside = useBreakpointValue({ base: false, lg: true }); // true if screen ≥ lg
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
@@ -15,7 +14,7 @@ const App = () => {
         <NavBar />
       </GridItem>
       {/* aside only for large devices */}
-      <Show when={showAside}>
+      <Show above="lg">
         <GridItem area="aside" bg="gold">
           Aside
         </GridItem>

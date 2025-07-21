@@ -1,11 +1,13 @@
-import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-
+import theme from "./theme";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ChakraProvider value={defaultSystem}>
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      {/* color stored in stoage to be rem later to apply dark mode go to chrome dev tools tp local storage then delete and refresh then dark color will appear*/}
       <App />
     </ChakraProvider>
   </React.StrictMode>
