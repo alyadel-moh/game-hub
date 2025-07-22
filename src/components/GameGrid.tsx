@@ -1,35 +1,25 @@
-import React, { useEffect, useState } from "react";
-import apiClient from "../api-client";
-import { Text } from "@chakra-ui/react";
-interface Game {
-  id: number;
-  name: string;
-}
-interface fetchgamesresponse {
-  count: number;
-  results: Game[];
-}
+import { SimpleGrid, Text } from "@chakra-ui/react";
+import useGames from "../hooks/useGames";
+import GameCard from "./GameCard";
 const GameGrid = () => {
-  const [games, setgames] = useState<Game[]>([]); // for storing game objects
-  const [error, seterror] = useState("");
-  //set to send a fetch request to the backend we use useEffect
-  useEffect(() => {
-    apiClient
-      .get<fetchgamesresponse>("/games")
-      .then((res) => setgames(res.data.results))
-      .catch((err) => seterror(err.message)); //shape of res interface object get from webiste in list of games
-  });
+  const { games, error } = useGames();
   return (
     <>
       {error && <Text>{error}</Text>}
       {/* add to x to /games to make error */}
-      <ul>
+      {/* we columns count acc to screen size */}
+      {/* padding to not be too close to screen edgess */}
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+        padding="10px"
+        spacing={10}
+      >
         {games.map((game) => (
-          <li key={game.id}>{game.name}</li> // we render name only for now
+          <GameCard key={game.id} game={game} />
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };
-
+// comp doesn't know about making any HTTP request
 export default GameGrid;
