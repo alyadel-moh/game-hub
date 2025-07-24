@@ -7,6 +7,10 @@ const App = () => {
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
+      templateColumns={{
+        base: "1fr", // one fraction which means column stretches and takes all available space
+        lg: "200px 1fr", // second column which is grid stretches and takes up all the avaialable space
+      }}
     >
       {/* singlecolumn nav and main no aside for mob devices */}
       {/* for large devices we use 2 columns 1024px */}
@@ -16,7 +20,7 @@ const App = () => {
       </GridItem>
       {/* aside only for large devices */}
       <Show above="lg">
-        <GridItem area="aside">
+        <GridItem area="aside" paddingX="5px">
           <GenreList />
         </GridItem>
       </Show>
