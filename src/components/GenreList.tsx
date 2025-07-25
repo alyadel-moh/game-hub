@@ -12,8 +12,9 @@ import {
 import getCroppedImageUrl from "../image-url";
 interface props {
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
-const GenreList = ({ onSelectGenre }: props) => {
+const GenreList = ({ selectedGenre, onSelectGenre }: props) => {
   const { data, isLoading, error } = useGenres(); // prop called data
   if (error) return null;
   if (isLoading) return <Spinner />;
@@ -29,6 +30,7 @@ const GenreList = ({ onSelectGenre }: props) => {
               src={getCroppedImageUrl(genre.image_background)}
             />
             <Button
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               onClick={() => onSelectGenre(genre)} // when genre is clicked the child (genrelist) notify parent which one is clicked to store it
               fontSize="lg"
               variant="link"

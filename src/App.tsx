@@ -24,7 +24,10 @@ const App = () => {
       {/* aside only for large devices */}
       <Show above="lg">
         <GridItem area="aside" paddingX="5px">
-          <GenreList onSelectGenre={(genre) => setselectedgenre(genre)} />
+          <GenreList
+            selectedGenre={selectedgenre}
+            onSelectGenre={(genre) => setselectedgenre(genre)}
+          />
           {/* function takes a genre object from gridlist as parameter and calls setselectedgenre in its body */}
         </GridItem>
       </Show>
