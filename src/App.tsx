@@ -10,7 +10,7 @@ const App = () => {
       templateColumns={{
         base: "1fr", // one fraction which means column stretches and takes all available space
         lg: "200px 1fr", // second column which is grid stretches and takes up all the avaialable space
-      }}
+      }} // if 200px is not present each column would take 50% of the screen
     >
       {/* singlecolumn nav and main no aside for mob devices */}
       {/* for large devices we use 2 columns 1024px */}

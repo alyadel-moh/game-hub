@@ -1,9 +1,11 @@
 import React from "react";
 import useGenres from "../hooks/UseGenres";
-import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
+import { HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
 import getCroppedImageUrl from "../image-url";
 const GenreList = () => {
-  const { data } = useGenres(); // prop called data
+  const { data, isLoading, error } = useGenres(); // prop called data
+  if (error) return null;
+  if (isLoading) return <Spinner />;
   return (
     <List>
       {/*list used to render items without bullet points */}
