@@ -31,7 +31,7 @@ const PlatfromIconList = ({ platforms }: Props) => {
   return (
     <HStack marginY={"10px"}>
       {platforms.map((platform) => (
-        <Icon as={iconMap[platform.slug]} color="gray.500" /> //500 is the chade of green color go to default theme in style system in chakra browser
+        <Icon key={platform.id} as={iconMap[platform.slug]} color="gray.500" /> //500 is the chade of green color go to default theme in style system in chakra browser
       ))}
     </HStack>
   );
