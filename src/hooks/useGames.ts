@@ -13,5 +13,5 @@ export interface Game {
   metacritic : number;
 }
 
-const useGames = (selectedGenre : Genre | null) => useData<Game>('/games',{params  : {genres : selectedGenre?.id}} ,[selectedGenre?.id]) //object params cont inside object set genres to selectedgenre.id you can see it gameslist in website rawg.io
+const useGames = (selectedGenre : Genre | null,selectedPlatform : Platform | null) => useData<Game>('/games',{params  : {genres : selectedGenre?.id,platforms : selectedPlatform?.id}} ,[selectedGenre?.id,selectedPlatform?.id]) //object params cont inside object set genres to selectedgenre.id you can see it gameslist in website rawg.io and array of dependencies
 export default useGames
