@@ -1,5 +1,5 @@
+import type { gameQuery } from "../App";
 import useData from "./useData";
-import type { Genre } from "./UseGenres";
 export interface Platform{
   id :number;
   name:string;
@@ -13,5 +13,5 @@ export interface Game {
   metacritic : number;
 }
 
-const useGames = (selectedGenre : Genre | null,selectedPlatform : Platform | null) => useData<Game>('/games',{params  : {genres : selectedGenre?.id,platforms : selectedPlatform?.id}} ,[selectedGenre?.id,selectedPlatform?.id]) //object params cont inside object set genres to selectedgenre.id you can see it gameslist in website rawg.io and array of dependencies
-export default useGames
+const useGames = (gamequery : gameQuery) => useData<Game>('/games',{params  : {genres : gamequery.genre?.id,platforms : gamequery.platform?.id}} ,[gamequery]) //object params cont inside object set genres to selectedgenre.id you can see it gameslist in website rawg.io and array of dependencies
+export default useGames   // pass gameQuery object any time object changes we need tpp  refresh data
