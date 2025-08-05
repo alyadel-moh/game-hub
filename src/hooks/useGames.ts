@@ -13,5 +13,5 @@ export interface Game {
   metacritic : number;
 }
 
-const useGames = (gamequery : gameQuery) => useData<Game>('/games',{params  : {genres : gamequery.genre?.id,platforms : gamequery.platform?.id,ordering : gamequery.sortOrder}} ,[gamequery]) //object params cont inside object set genres to selectedgenre.id you can see it gameslist in website rawg.io and array of dependencies
+const useGames = (gamequery : gameQuery) => useData<Game>('/games',{params  : {genres : gamequery.genre?.id,platforms : gamequery.platform?.id,ordering : gamequery.sortOrder,search : gamequery.searchText}} ,[gamequery]) //object params cont inside object set genres to selectedgenre.id you can see it gameslist in website rawg.io and array of dependencies
 export default useGames   // pass gameQuery object any time object changes we need tpp  refresh data
