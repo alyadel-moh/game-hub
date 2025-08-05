@@ -9,7 +9,8 @@ const Colormodeswitch = () => {
         onChange={toggleColorMode}
       />
       {/* switch is on when dark mode (ischecked)   color scheme is switch color*/}
-      <Text>Dark Mode</Text>
+      <Text whiteSpace="nowrap">Dark Mode</Text>
+      {/* whitespace as dark was in aline in mode in the next line after adding search box */}
     </HStack>
   );
 };
