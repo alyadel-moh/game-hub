@@ -3,6 +3,7 @@ import useGenres from "../hooks/UseGenres";
 import type { Genre } from "../hooks/UseGenres";
 import {
   Button,
+  Heading,
   HStack,
   Image,
   List,
@@ -19,29 +20,37 @@ const GenreList = ({ selectedGenre, onSelectGenre }: props) => {
   if (error) return null;
   if (isLoading) return <Spinner />;
   return (
-    <List>
-      {/*list used to render items without bullet points */}
-      {data.map((genre) => (
-        <ListItem key={genre.id} paddingY="5px">
-          <HStack>
-            <Image
-              boxSize="32px"
-              borderRadius={8}
-              src={getCroppedImageUrl(genre.image_background)}
-            />
-            <Button
-              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-              onClick={() => onSelectGenre(genre)} // when genre is clicked the child (genrelist) notify parent which one is clicked to store it
-              fontSize="lg"
-              variant="link"
-            >
-              {/* variant button look like links */}
-              {genre.name}
-            </Button>
-          </HStack>
-        </ListItem>
-      ))}
-    </List>
+    <>
+      <Heading fontSize="2xl" marginBottom={3}>
+        Genres
+      </Heading>
+      <List>
+        {/*list used to render items without bullet points */}
+        {data.map((genre) => (
+          <ListItem key={genre.id} paddingY="5px">
+            <HStack>
+              <Image
+                objectFit="cover" //to make all images scaled to fill the container
+                boxSize="32px"
+                borderRadius={8}
+                src={getCroppedImageUrl(genre.image_background)}
+              />
+              <Button
+                whiteSpace="normal" //as massive player is overlapping
+                textAlign="left" // to make all the text to left in same line
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+                onClick={() => onSelectGenre(genre)} // when genre is clicked the child (genrelist) notify parent which one is clicked to store it
+                fontSize="lg"
+                variant="link"
+              >
+                {/* variant button look like links */}
+                {genre.name}
+              </Button>
+            </HStack>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
 
