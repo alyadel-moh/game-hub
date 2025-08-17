@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { gameQuery } from "../App";
-import apiClient, { type fetchresponse } from "../api-client";
 import type { Platform } from "./usePlatforms";
+import APIClient, { type fetchresponse } from "../api-client";
 
 export interface Game {
   id: number;
@@ -14,6 +14,7 @@ export interface Game {
 
 const useGames =(gamequery : gameQuery) => useQuery<fetchresponse<Game>,Error>({
    queryKey : ['games',gamequery],
-  queryFn : () => apiClient.get<fetchresponse<Game>>("/games",{params  : {genres : gamequery.genre?.id,parent_platforms : gamequery.platform?.id,ordering : gamequery.sortOrder,search : gamequery.searchText}}).then(res => res.data)
+  queryFn :() => new APIClient<Game>("/games").getAll({params  : {genres : gamequery.genre?.id,parent_platforms : gamequery.platform?.id,ordering : gamequery.sortOrder,search : gamequery.searchText}})
+  // function hena 3lshan games bet88yr so when changing games function is called to fetch
 })
 export default useGames   // pass gameQuery object any time object changes we need tpp  refresh data
