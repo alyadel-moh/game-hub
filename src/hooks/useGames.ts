@@ -1,10 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import type { gameQuery } from "../App";
-import useData from "./useData";
-export interface Platform{
-  id :number;
-  name:string;
-  slug :string
-}
+import apiClient, { type fetchresponse } from "../api-client";
+import type { Platform } from "./usePlatforms";
+
 export interface Game {
   id: number;
   name: string;
@@ -14,5 +12,8 @@ export interface Game {
   rating_top :number
 }
 
-const useGames = (gamequery : gameQuery) => useData<Game>('/games',{params  : {genres : gamequery.genre?.id,parent_platforms : gamequery.platform?.id,ordering : gamequery.sortOrder,search : gamequery.searchText}} ,[gamequery]) //object params cont inside object set genres to selectedgenre.id you can see it gameslist in website rawg.io and array of dependencies
+const useGames =(gamequery : gameQuery) => useQuery<fetchresponse<Game>,Error>({
+   queryKey : ['games',gamequery],
+  queryFn : () => apiClient.get<fetchresponse<Game>>("/games",{params  : {genres : gamequery.genre?.id,parent_platforms : gamequery.platform?.id,ordering : gamequery.sortOrder,search : gamequery.searchText}}).then(res => res.data)
+})
 export default useGames   // pass gameQuery object any time object changes we need tpp  refresh data

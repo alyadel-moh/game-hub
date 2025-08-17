@@ -27,7 +27,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: props) => {
         </Heading>
         <List>
           {/*list used to render items without bullet points */}
-          {data.map((genre) => (
+          {data?.results.map((genre) => (
             <ListItem key={genre.id} paddingY="5px">
               <HStack>
                 <Image

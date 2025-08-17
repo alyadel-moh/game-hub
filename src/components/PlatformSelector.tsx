@@ -1,7 +1,6 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import usePlatforms from "../hooks/usePlatforms";
-import type { Platform } from "../hooks/useGames";
+import usePlatforms, { type Platform } from "../hooks/usePlatforms";
 interface prop {
   onselectplatform: (platform: Platform) => void;
   selectedPlatform: Platform | null;
@@ -15,7 +14,7 @@ const PlatformSelector = ({ onselectplatform, selectedPlatform }: prop) => {
         {selectedPlatform?.name || "platforms"}
       </MenuButton>
       <MenuList>
-        {data.map((platform) => (
+        {data?.results.map((platform) => (
           <MenuItem
             onClick={() => onselectplatform(platform)}
             key={platform.id}
