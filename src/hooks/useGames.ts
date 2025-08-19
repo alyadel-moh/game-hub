@@ -20,6 +20,7 @@ const useGames =(gamequery : gameQuery) => useInfiniteQuery<fetchresponse<Game>,
   placeholderData : keepPreviousData,
   getNextPageParam : (lastpage,allpages) => {
     return lastpage.next ? allpages.length+1 : undefined
-  }
+  },
+  staleTime : 24*60*60*1000
 })
 export default useGames   // pass gameQuery object any time object changes we need tpp  refresh data

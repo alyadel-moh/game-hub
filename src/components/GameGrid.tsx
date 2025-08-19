@@ -1,10 +1,11 @@
-import { Box, SimpleGrid, Text, Button } from "@chakra-ui/react";
+import { Box, SimpleGrid, Text, Button, Spinner } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardCountainer from "./GameCardCountainer";
 import type { gameQuery } from "../App";
 import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 interface Props {
   gameQuery: gameQuery;
 }
@@ -19,9 +20,22 @@ const GameGrid = ({ gameQuery }: Props) => {
   } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6]; //array with six items each item rendered to skeleton comp
   if (error) return <Text>{error.message}</Text>;
+  const fetchgamescount =
+    data?.pages.reduce((total, page) => total + page.results.length, 0) || 0; //total number of games fetched
+  // !! converts to a boolean value
   return (
-    <Box padding="10px">
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+    // <Box padding="10px">
+    <InfiniteScroll
+      dataLength={fetchgamescount}
+      hasMore={!!hasNextPage}
+      next={fetchNextPage}
+      loader={<Spinner />}
+    >
+      <SimpleGrid
+        padding="10px"
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        spacing={6}
+      >
         {isLoading &&
           skeletons.map((Skeleton) => (
             <GameCardCountainer key={Skeleton}>
@@ -38,12 +52,13 @@ const GameGrid = ({ gameQuery }: Props) => {
           </React.Fragment>
         ))}
       </SimpleGrid>
-      {hasNextPage && (
-        <Button marginY={4} onClick={() => fetchNextPage()}>
-          {isFetchingNextPage ? "Loading...." : "Load More"}
-        </Button>
-      )}
-    </Box>
+    </InfiniteScroll>
+    // {hasNextPage && (
+    //<Button marginY={4} onClick={() => fetchNextPage()}>
+    //   {isFetchingNextPage ? "Loading...." : "Load More"}
+    // </Button>
+    //  )}
+    // </Box>
   );
 };
 // comp doesn't know about making any HTTP request
