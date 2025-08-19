@@ -18,5 +18,6 @@ export interface fetchresponse<T>
 {
     count : number;
     results : T[]
+    next : string | null
 }
 export default APIClient

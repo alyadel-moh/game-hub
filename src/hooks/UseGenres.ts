@@ -10,6 +10,6 @@ const useGenres = () => useQuery({
     queryKey : ['genres'],
     queryFn :  new APIClient<Genre>('/genres').getAll,
     staleTime : 24*60*60*1000,  // high stale time as genres hardly ever changes
-    initialData : {count : genres.length , results : genres}
+    initialData : {count : genres.length , results : genres,next : null}
 })  // hiding this details inside usegenres hook
 export default useGenres

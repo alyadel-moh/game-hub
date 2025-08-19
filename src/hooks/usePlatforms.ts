@@ -10,7 +10,7 @@ const usePlatforms = () => (useQuery({
     queryKey : ['platforms'],
     queryFn : new APIClient<Platform>('/platforms/lists/parents').getAll,
       staleTime : 24*60*60*1000,  // high stale time as genres hardly ever changes
-        initialData : {count : platforms.length , results : platforms} 
+        initialData : {count : platforms.length , results : platforms , next : null} 
 }))
 
 export default usePlatforms
