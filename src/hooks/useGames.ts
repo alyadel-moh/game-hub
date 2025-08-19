@@ -14,7 +14,7 @@ export interface Game {
 
 const useGames =(gamequery : gameQuery) => useInfiniteQuery<fetchresponse<Game>,Error>({
    queryKey : ['games',gamequery],
-  queryFn :({pageParam}) => new APIClient<Game>("/games").getAll({params  : {genres : gamequery.genre?.id,parent_platforms : gamequery.platform?.id,ordering : gamequery.sortOrder,search : gamequery.searchText,page : pageParam}}),
+  queryFn :({pageParam}) => new APIClient<Game>("/games").getAll({params  : {genres : gamequery.genreId,parent_platforms : gamequery.platformId,ordering : gamequery.sortOrder,search : gamequery.searchText,page : pageParam}}),
   // function hena 3lshan games bet88yr so when changing games function is called to fetch
   initialPageParam : 1,
   placeholderData : keepPreviousData,
