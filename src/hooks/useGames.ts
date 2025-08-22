@@ -2,6 +2,7 @@ import { keepPreviousData, useInfiniteQuery} from "@tanstack/react-query";
 import type { gameQuery } from "../App";
 import type { Platform } from "./usePlatforms";
 import APIClient, { type fetchresponse } from "../api-client";
+import ms from "ms";
 
 export interface Game {
   id: number;
@@ -21,6 +22,6 @@ const useGames =(gamequery : gameQuery) => useInfiniteQuery<fetchresponse<Game>,
   getNextPageParam : (lastpage,allpages) => {
     return lastpage.next ? allpages.length+1 : undefined
   },
-  staleTime : 24*60*60*1000
+  staleTime : ms('24h')
 })
 export default useGames   // pass gameQuery object any time object changes we need tpp  refresh data
