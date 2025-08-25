@@ -1,8 +1,9 @@
 import { keepPreviousData, useInfiniteQuery} from "@tanstack/react-query";
-import type { gameQuery } from "../App";
+
 import type { Platform } from "./usePlatforms";
 import APIClient, { type fetchresponse } from "../api-client";
 import ms from "ms";
+import useGameQueryStore from "../store";
 
 export interface Game {
   id: number;
@@ -13,7 +14,9 @@ export interface Game {
   rating_top :number
 }
 
-const useGames =(gamequery : gameQuery) => useInfiniteQuery<fetchresponse<Game>,Error>({
+const useGames =() => {
+  const gamequery = useGameQueryStore(s => s.gamequery) //if any of gamequery values changes this comp will rerender
+  return  useInfiniteQuery<fetchresponse<Game>,Error>({
    queryKey : ['games',gamequery],
   queryFn :({pageParam}) => new APIClient<Game>("/games").getAll({params  : {genres : gamequery.genreId,parent_platforms : gamequery.platformId,ordering : gamequery.sortOrder,search : gamequery.searchText,page : pageParam}}),
   // function hena 3lshan games bet88yr so when changing games function is called to fetch
@@ -24,4 +27,5 @@ const useGames =(gamequery : gameQuery) => useInfiniteQuery<fetchresponse<Game>,
   },
   staleTime : ms('24h')
 })
+}
 export default useGames   // pass gameQuery object any time object changes we need tpp  refresh data

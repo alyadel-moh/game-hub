@@ -3,19 +3,10 @@ import { Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
-import { useState } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import Sortselector from "./components/Sortselector";
 import GameHeading from "./components/GameHeading";
-export interface gameQuery {
-  genreId?: number;
-  platformId?: number;
-  sortOrder: string;
-  searchText: string;
-}
 const App = () => {
-  const [gameQuery, setgameQuery] = useState<gameQuery>({} as gameQuery);
-
   return (
     <Grid
       templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
@@ -28,44 +19,25 @@ const App = () => {
       {/* for large devices we use 2 columns 1024px */}
       <GridItem area="nav">
         {/*background-color is coral  */}
-        <NavBar
-          onSearch={(searchText) => setgameQuery({ ...gameQuery, searchText })}
-        />
+        <NavBar />
       </GridItem>
       {/* aside only for large devices */}
       <Show above="lg">
         <GridItem area="aside" paddingX="5px">
-          <GenreList
-            selectedGenreId={gameQuery.genreId}
-            onSelectGenre={
-              (genre) => setgameQuery({ ...gameQuery, genreId: genre.id })
-              // overrides query id with the selectedgenre
-            }
-          />
-          {/* function takes a genre object from gridlist as parameter and calls setselectedgenre in its body */}
+          <GenreList />
         </GridItem>
       </Show>
       <GridItem area="main">
         <Box paddingLeft={3}>
           {/* bos to modify in a single place */}
-          <GameHeading gamequery={gameQuery} />
+          <GameHeading />
           <HStack spacing={5} marginBottom={5}>
             {/* padding to be lined with first game card  margin button to not be too close to cards*/}
-            <PlatformSelector
-              selectedPlatformId={gameQuery.platformId}
-              onselectplatform={(platform) =>
-                setgameQuery({ ...gameQuery, platformId: platform.id })
-              }
-            />
-            <Sortselector
-              sortOrder={gameQuery.sortOrder}
-              onSelectsortorder={(sortOrder) =>
-                setgameQuery({ ...gameQuery, sortOrder })
-              }
-            />
+            <PlatformSelector />
+            <Sortselector />
           </HStack>
         </Box>
-        <GameGrid gameQuery={gameQuery} />
+        <GameGrid />
       </GridItem>
     </Grid>
   ); // create 2 columns
