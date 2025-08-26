@@ -1,21 +1,9 @@
 import { keepPreviousData, useInfiniteQuery} from "@tanstack/react-query";
 
-import type { Platform } from "./usePlatforms";
+import type { Game } from "../entites/Game";
 import APIClient, { type fetchresponse } from "../api-client";
 import ms from "ms";
 import useGameQueryStore from "../store";
-
-export interface Game {
-  id: number;
-  name: string;
-  background_image : string
-  parent_platforms : {platform : Platform}[]
-  metacritic : number;
-  rating_top :number
-  slug : string
-  description_raw : string
-}
-
 const useGames =() => {
   const gamequery = useGameQueryStore(s => s.gamequery) //if any of gamequery values changes this comp will rerender
   return  useInfiniteQuery<fetchresponse<Game>,Error>({
