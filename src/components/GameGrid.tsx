@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Text, Button, Spinner } from "@chakra-ui/react";
+import { SimpleGrid, Text, Spinner } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
@@ -6,14 +6,7 @@ import GameCardCountainer from "./GameCardCountainer";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 const GameGrid = () => {
-  const {
-    data,
-    error,
-    isLoading,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useGames();
+  const { data, error, isLoading, fetchNextPage, hasNextPage } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6]; //array with six items each item rendered to skeleton comp
   if (error) return <Text>{error.message}</Text>;
   const fetchgamescount =
