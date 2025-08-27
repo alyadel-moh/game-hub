@@ -1,8 +1,8 @@
-import type { Genre } from "./Genre";
-import type { Platform } from "./Platfrom";
-import type { Publisher } from "./Publisher";
+import type  Genre  from "./Genre";
+import type  Platform  from "./Platfrom";
+import type Publisher  from "./Publisher";
 
-export interface Game {
+export default interface Game {
   id: number;
   name: string;
   background_image : string
@@ -13,4 +13,4 @@ export interface Game {
   description_raw : string
   genres : Genre[]
   publishers: Publisher[]
-}
+} // deafult means no more curly braces
