@@ -9,7 +9,7 @@ const GameTrailer = ({ gameId }: props) => {
   if (error) throw error;
   const first = data?.results[0];
   return first ? (
-    <video src={first.data.max} poster={first.preview} controls />
+    <video src={first.data[480]} poster={first.preview} controls />
   ) : null;
 };
 
